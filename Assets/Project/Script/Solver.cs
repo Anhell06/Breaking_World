@@ -1,6 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+
+//---------------------------------------------------------------------------
+//-----------------TEST CLASS--------DONT USE IN PROJECT---------------------
+//---------------------------------------------------------------------------
 
 public class Solver : MonoBehaviour
 {
@@ -19,7 +22,7 @@ public class Solver : MonoBehaviour
     #endregion
 
     private const int boundaries = 2;
-    private bool filldEnded = false;
+    
 
     private void Start()
     {
@@ -46,14 +49,14 @@ public class Solver : MonoBehaviour
         {
             for (int j = 1; j < fieldLength - 1; j++)
             {
-                if ((field.uField[i + (int)moveVector.x, j + (int)moveVector.y] == null || field.uField[i + (int)moveVector.x, j + (int)moveVector.y].IsDestroyable) 
-                    && field.uField[i, j] != null 
+                if ((field.uField[i + (int)moveVector.x, j + (int)moveVector.y] == null || field.uField[i + (int)moveVector.x, j + (int)moveVector.y].IsDestroyable)
+                    && field.uField[i, j] != null
                     && field.uField[i, j].IsMoveble)
                 {
 
                     field.uField[i + (int)moveVector.x, j + (int)moveVector.y] = field.uField[i, j];
-                        field.uField[i, j] = null;
-                                        
+                    field.uField[i, j] = null;
+
                 }
 
             }
@@ -82,7 +85,7 @@ public class Solver : MonoBehaviour
             }
         }
         Debug.Log(field.ToString());
-        
+
     }
 
     private void FillEdges()
@@ -90,12 +93,12 @@ public class Solver : MonoBehaviour
         for (int i = 0; i < fieldWidth; i++)
         {
             field.uField[i, 0] = new Block(false, true, false, "deathle");
-            field.uField[i, fieldLength-1] = new Block(false, true, false, "deathle");
+            field.uField[i, fieldLength - 1] = new Block(false, true, false, "deathle");
         }
         for (int i = 0; i < fieldLength; i++)
         {
             field.uField[0, i] = new Block(false, true, false, "deathle");
-            field.uField[fieldWidth-1, i] = new Block(false, true, false, "deathle");
+            field.uField[fieldWidth - 1, i] = new Block(false, true, false, "deathle");
         }
     }
 }
@@ -119,7 +122,7 @@ class Field
 
         for (int i = 1; i < x - 1; i++)
         {
-            
+
             for (int j = 1; j < y - 1; j++)
             {
                 s += uField[i, j]?.ToString();
@@ -135,7 +138,7 @@ class Field
 
 public class Block
 {
-    public Block(bool isMoveble, bool isDeathle, bool isDestroyable, string type )
+    public Block(bool isMoveble, bool isDeathle, bool isDestroyable, string type)
     {
         this.isMoveble = isMoveble;
         this.isDeathle = isDeathle;
@@ -147,10 +150,10 @@ public class Block
     private bool isDestroyable;
     private string type;
 
-    public bool IsMoveble { get => isMoveble;}
-    public bool IsDeathle { get => isDeathle;}
-    public bool IsDestroyable { get => isDestroyable;}
-    public string Type { get => type;}
+    public bool IsMoveble { get => isMoveble; }
+    public bool IsDeathle { get => isDeathle; }
+    public bool IsDestroyable { get => isDestroyable; }
+    public string Type { get => type; }
 
     public override string ToString()
     {
