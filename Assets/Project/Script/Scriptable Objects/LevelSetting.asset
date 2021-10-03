@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 299dbfdf80ae63246b31d6cd5c467d88, type: 3}
+  m_Name: LevelSetting
+  m_EditorClassIdentifier: 
+  LevelNumber: 1
+  LevelDifficulty: 1
+  BlockInLevel:
+  - {fileID: 4176499475765279908, guid: c26b64ce9b17110458a45632cd9972c7, type: 3}
+  - {fileID: 19938558515079508, guid: 87c41e4593cf32243873699f9f38847c, type: 3}
+  - {fileID: 4251200076058562701, guid: c05fffa7b04474b4d8fc5aaf7c433e99, type: 3}
+  - {fileID: 4892932548432673087, guid: e60bca9e7e5407543ad28be2cf363438, type: 3}
+  - {fileID: 594723576464963127, guid: f2879c55977bef54e993eb634082e077, type: 3}
+  - {fileID: 2266373992704744963, guid: 27da84594ba1f544a8624b144ee2494e, type: 3}
+  - {fileID: 1022564920733684646, guid: 0df51b7e47d60b243a3a4c9440028acb, type: 3}
+  - {fileID: 4991706376927815866, guid: fe028e068ec94344b9680afe486e1db0, type: 3}
+  ItemInLevel: []
