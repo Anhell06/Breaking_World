@@ -35,29 +35,64 @@ public class Player : MonoBehaviour
 
         playerMover.Move();
         waitingTime = playerMover.GetWaitingTime;
+        Debug.Log("PlayerMove");
     }
     private void Death()
     {
         status = PlayerStatus.Death;
         StatusChanged?.Invoke(status);
+        Debug.Log("Death");
     }
 
     private void TryTakeItem()
     {
         status = PlayerStatus.Stay;
         StatusChanged?.Invoke(status);
+        Debug.Log("TryTakeItem");
     }
 
     private void LevelEnded()
     {
         status = PlayerStatus.Win;
         StatusChanged?.Invoke(status);
+        Debug.Log("LevelEnded");
     }
 
     public void OnTriggerEnter(Collider other)
     {
+        #region Блок
+        var someBlock = other.GetComponent<AbstractBlock>();
+
+        if (someBlock != null)
+        {
+            if (someBlock.IsDeathable)
+            {
+                Death();
+            }
+        }
+        #endregion
+
+        #region Конец уровня
+        var endLevelTrigger = other.GetComponent<EndLevelTriggerEmpty>();
+
+        if (endLevelTrigger != null)
+        {
+            LevelEnded();
+        }
+        #endregion
+
+        //#region Предмет (не дописан)
+        //var tryGetSomeItem = other.TGetComponent<AbstractBlock>();
+
+        //if (tryGetSomeItem != null)
+        //{
+        //    if ()
+             
+        //}
+        //#endregion
 
     }
+
 
 
 }
