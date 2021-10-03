@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface IFieldBilder
 {
-    //Field GetField();
+    Battlefield GetField();
     void CheckField();
     void AddItemOnField();
-    void FillField();
+    void MakeField(int difficulty, Battlefield battlefield);
 }
