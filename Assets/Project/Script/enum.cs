@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbstractBlock : MonoBehaviour
+public enum PlayerStatus
 {
-    public ItemSO item;
-    
+    Move,
+    Death,
+    Win,
+    Stay
 }
