@@ -8,12 +8,12 @@ public class BattlefieldCreater : MonoBehaviour
     private IFieldBilder fieldBilder;
     [SerializeField]
     private Battlefield battlefield;
-    private int difficulty;
     [SerializeField]
     private int fieldWidth;
     [SerializeField]
     private int fieldHeight;
 
+    private int difficulty;
 
     private void Start()
     {
@@ -31,12 +31,12 @@ public class BattlefieldCreater : MonoBehaviour
 
         battlefield = fieldBilder.GetField();
 
-        for (int i = 0; i < fieldWidth; i++)
+        for (int i = 0; i < battlefield.line.Length; i++)
         {
-            for (int j = 0; j < fieldHeight; j++)
+            for (int j = 0; j < battlefield.line[0].block.Length; j++)
             {
                 var block = battlefield.line[i].block[j];
-                Instantiate(block, new Vector3(i, 0, j), Quaternion.identity);
+                Instantiate(block, new Vector3(i, 0, j) + transform.position, Quaternion.identity, transform);
             }
 
         }

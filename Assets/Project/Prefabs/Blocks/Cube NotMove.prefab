@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 505711715254176050, guid: f2879c55977bef54e993eb634082e077,
         type: 3}
       propertyPath: m_Name
-      value: Cube Variant 3
+      value: Cube Death&Des
       objectReference: {fileID: 0}
     - target: {fileID: 505711715254176053, guid: f2879c55977bef54e993eb634082e077,
         type: 3}
@@ -69,12 +69,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 505711715254176055, guid: f2879c55977bef54e993eb634082e077,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 505711715254176055, guid: f2879c55977bef54e993eb634082e077,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2de4fc36fb0a0454c9631b8819af097d, type: 2}
     - target: {fileID: 594723576464963127, guid: f2879c55977bef54e993eb634082e077,
         type: 3}
       propertyPath: isMovable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 594723576464963127, guid: f2879c55977bef54e993eb634082e077,
+        type: 3}
+      propertyPath: isDeathable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 594723576464963127, guid: f2879c55977bef54e993eb634082e077,
+        type: 3}
+      propertyPath: isDestroyable
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

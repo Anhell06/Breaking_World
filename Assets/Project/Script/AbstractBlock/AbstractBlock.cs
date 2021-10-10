@@ -18,28 +18,30 @@ public class AbstractBlock : MonoBehaviour
     private Vector3 currentPosition;
     private AbstractBlock ClashBlock;
 
+    public bool IsDeathable { get => isDeathable; }
+
     private void StartTouch(Vector2 vector)
     {
         if (isMovable)
         {
-
-            if (transform.position.x >= currentPosition.x + 1)
-            {
-                transform.position = currentPosition;
-            }
-            if (transform.position.z >= currentPosition.z + 1)
-            {
-                transform.position = currentPosition;
-            }
-            if (transform.position.x <= currentPosition.x - 1)
-            {
-                transform.position = currentPosition;
-            }
-            if (transform.position.z <= currentPosition.z - 1)
-            {
-                transform.position = currentPosition;
-            }
             Vector3 ver3 = Vector2ToVector3(vector);
+
+            if (transform.position.x >= currentPosition.x + 0.5)
+            {
+                transform.position = currentPosition;
+            }
+            if (transform.position.z >= currentPosition.z + 0.5)
+            {
+                transform.position = currentPosition;
+            }
+            if (transform.position.x <= currentPosition.x - 0.5)
+            {
+                transform.position = currentPosition;
+            }
+            if (transform.position.z <= currentPosition.z - 0.5)
+            {
+                transform.position = currentPosition;
+            }
 
             transform.position += ver3;
         }
@@ -67,8 +69,10 @@ public class AbstractBlock : MonoBehaviour
         if (isMovable)
         {
             Vector3 ver3 = Vector2ToVector3(vector);
-            transform.position += ver3;
-            currentPosition = transform.position;
+            currentPosition += ver3;
+            transform.position = currentPosition;
+            //transform.position += ver3;
+            //currentPosition = transform.position;
 
         }
         if (ClashBlock != null)
@@ -112,6 +116,18 @@ public class AbstractBlock : MonoBehaviour
     {
         var block = gameObject.AddComponent<AbstractBlock>();
         block = BlockChange;
+    }
+
+
+    //TODO
+    private void CheckBlokBeforeMove()
+    {
+        
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.position, out hit, 1))
+        {
+            return;
+        }
     }
 
 }

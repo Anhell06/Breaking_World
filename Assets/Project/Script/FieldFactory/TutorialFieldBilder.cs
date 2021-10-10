@@ -6,7 +6,8 @@ public class TutorialFieldBilder : MonoBehaviour, IFieldBilder
 {
     [SerializeField]
     private List<AbstractBlock> blockPool;
-
+    [SerializeField]
+    private BorderBlock borderBlock;
     [SerializeField]
     private List<ItemSO> itemPool;
 
@@ -40,7 +41,15 @@ public class TutorialFieldBilder : MonoBehaviour, IFieldBilder
         {
             for (int j = 0; j < battlefield.line[0].block.Length; j++)
             {
-                battlefield.line[i].block[j] = blockPool[Random.Range(0, blockPool.Count)];
+                
+                if (i == 0 || i == battlefield.line.Length - 1 || j == 0 || j == battlefield.line[0].block.Length - 1)
+                {
+                    battlefield.line[i].block[j] = borderBlock;
+                }
+                else
+                {
+                    battlefield.line[i].block[j] = blockPool[Random.Range(0, blockPool.Count)];
+                }
             }
         }
     }
