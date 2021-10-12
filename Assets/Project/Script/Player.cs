@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+//Добавить обязательную проверку на наличии компонента IPlayerMovingSystem
 public class Player : MonoBehaviour
 {
     public UnityAction<PlayerStatus> StatusChanged;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     {
         playerMover = GetComponent<IPlayerMovingSystem>();
         waitingTime = playerMover.GetWaitingTime;
+        //установить стартовый статус игрока
     }
 
     private void Update()
@@ -24,43 +26,43 @@ public class Player : MonoBehaviour
         if (waitingTime <= 0)
         {
             MovePlayer();
-            
         }
     }
 
     private void MovePlayer()
     {
-        status = PlayerStatus.Move;
+        status = PlayerStatus.Move; //создать метод SetStatus(PlayerStatus status) и вынести в него эту и следующую строку
         StatusChanged?.Invoke(status);
 
         playerMover.Move();
-        waitingTime = playerMover.GetWaitingTime;
+        waitingTime = playerMover.GetWaitingTime; //вынести в апдейт под MovePlayer нарушает принцип единой ответственности
         Debug.Log("PlayerMove");
     }
     private void Death()
     {
-        status = PlayerStatus.Death;
+        status = PlayerStatus.Death; // соответсвуенно оже заменеться на метод SetStatus(PlayerStatus status)
         StatusChanged?.Invoke(status);
         Debug.Log("Death");
     }
 
     private void TryTakeItem()
     {
-        status = PlayerStatus.Stay;
+        status = PlayerStatus.Stay; // аналогично
         StatusChanged?.Invoke(status);
         Debug.Log("TryTakeItem");
     }
 
     private void LevelEnded()
     {
-        status = PlayerStatus.Win;
+        status = PlayerStatus.Win; //тоже
         StatusChanged?.Invoke(status);
         Debug.Log("LevelEnded");
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        #region Блок
+        #region Блок        
+        // не исользуй регионы, если хочешь гдето воткнуть регион вынеси это лучше в отдельный метот типа CheckDethBlock()
         var someBlock = other.GetComponent<AbstractBlock>();
 
         if (someBlock != null)
@@ -79,7 +81,7 @@ public class Player : MonoBehaviour
         {
             LevelEnded();
         }
-        #endregion
+        #endregion // допиши вынеси в отдельный метот убери регион
 
         //#region Предмет (не дописан)
         //var tryGetSomeItem = other.TGetComponent<AbstractBlock>();
