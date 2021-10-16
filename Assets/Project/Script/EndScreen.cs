@@ -33,7 +33,7 @@ public class EndScreen : MonoBehaviour
 
     private void RestartLevel()
     {
-        
+            
     }
     private void LevelEnded(PlayerStatus playerStatus)
     {

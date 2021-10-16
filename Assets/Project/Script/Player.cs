@@ -60,37 +60,31 @@ public class Player : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        #region Блок
         var someBlock = other.GetComponent<AbstractBlock>();
 
         if (someBlock != null)
         {
+
             if (someBlock.IsDeathable)
             {
                 Death();
             }
-        }
-        #endregion
 
-        #region Конец уровня
+            someBlock.GetItem();
+
+            if (someBlock.GetItem() != null)
+            {
+                TryTakeItem();
+            }
+
+        }
+        
         var endLevelTrigger = other.GetComponent<EndLevelTriggerEmpty>();
 
         if (endLevelTrigger != null)
         {
             LevelEnded();
         }
-        #endregion
-
-        //#region Предмет (не дописан)
-        //var tryGetSomeItem = other.TGetComponent<AbstractBlock>();
-
-        //if (tryGetSomeItem != null)
-        //{
-        //    if ()
-             
-        //}
-        //#endregion
-
     }
 
 

@@ -129,6 +129,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1477438148}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &158825937 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 200827535, guid: b946e5cc7e9c6d74ea7d5d14bbb8ef64,
+    type: 3}
+  m_PrefabInstance: {fileID: 1477438148}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158825935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5037b242b0057409f1d1932a06b2f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &158825942
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -179,7 +191,7 @@ MonoBehaviour:
   isWin: 0
   sceneLoader: {fileID: 0}
   levelSetting: {fileID: 0}
-  playerStatus: {fileID: 0}
+  playerStatus: {fileID: 158825937}
   button: {fileID: 700962761}
 --- !u!4 &233823308
 Transform:
@@ -1095,6 +1107,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 200827534, guid: b946e5cc7e9c6d74ea7d5d14bbb8ef64, type: 3}
       propertyPath: speed
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 392710066321930976, guid: b946e5cc7e9c6d74ea7d5d14bbb8ef64,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 392710066321930976, guid: b946e5cc7e9c6d74ea7d5d14bbb8ef64,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 452835133849587970, guid: b946e5cc7e9c6d74ea7d5d14bbb8ef64,
