@@ -15,10 +15,51 @@ public class AbstractBlock : MonoBehaviour
     private ItemSO item;
     [SerializeField]
     private MoveFieldChanelSO mover;
-    private Vector3 currentPosition;
+    private Vector3 startPosition;
     private AbstractBlock ClashBlock;
+    
+    [SerializeField]
+    private bool[] environmentBlocks;
+    private Vector3[] direction;
 
     public bool IsDeathable { get => isDeathable; }
+
+    private void Update()
+    {
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.red);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left), Color.green);
+    }
+
+
+    private void Start()
+    {
+        mover.TouchForMoveFildeUpdate += StartTouch;
+        mover.TouchBeEnded += EndMove;
+
+        startPosition = transform.position;
+        environmentBlocks = new bool[4] { false, false, false, false };
+        direction = new Vector3[4] { Vector3.forward, -Vector3.forward, Vector3.left, -Vector3.left };
+
+        GetEnviropmentBlock();
+    }
+
+    private void GetEnviropmentBlock()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            Ray ray = new Ray(transform.position, direction[i]);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, 1f) && hit.transform.GetComponent<AbstractBlock>())
+            {
+                environmentBlocks[i] = true;
+            }
+            else
+            {
+                environmentBlocks[i] = false;
+            }
+
+        }
+    }
 
     private void StartTouch(Vector2 vector)
     {
@@ -26,24 +67,28 @@ public class AbstractBlock : MonoBehaviour
         {
             Vector3 ver3 = Vector2ToVector3(vector);
 
-            if (transform.position.x >= currentPosition.x + 0.5)
+            if (IsThereDirectionalBlock(ver3))
+                return;
+
+            
+            if (transform.position.x >= startPosition.x + 0.5)
             {
-                transform.position = currentPosition;
+                transform.position = startPosition;
             }
-            if (transform.position.z >= currentPosition.z + 0.5)
+            if (transform.position.z >= startPosition.z + 0.5)
             {
-                transform.position = currentPosition;
+                transform.position = startPosition;
             }
-            if (transform.position.x <= currentPosition.x - 0.5)
+            if (transform.position.x <= startPosition.x - 0.5)
             {
-                transform.position = currentPosition;
+                transform.position = startPosition;
             }
-            if (transform.position.z <= currentPosition.z - 0.5)
+            if (transform.position.z <= startPosition.z - 0.5)
             {
-                transform.position = currentPosition;
+                transform.position = startPosition;
             }
 
-            transform.position += ver3;
+            transform.position += ver3 ;
         }
 
     }
@@ -53,12 +98,6 @@ public class AbstractBlock : MonoBehaviour
         return new Vector3(vector.x, 0, vector.y);
     }
 
-    private void Start()
-    {
-        mover.TouchForMoveFildeUpdate += StartTouch;
-        currentPosition = transform.position;
-        mover.TouchBeEnded += EndMove;
-    }
     private void OnDestroy()
     {
         mover.TouchForMoveFildeUpdate -= StartTouch;
@@ -69,16 +108,19 @@ public class AbstractBlock : MonoBehaviour
         if (isMovable)
         {
             Vector3 ver3 = Vector2ToVector3(vector);
-            currentPosition += ver3;
-            transform.position = currentPosition;
-            //transform.position += ver3;
-            //currentPosition = transform.position;
 
+            if (IsThereDirectionalBlock(ver3) == false)
+                startPosition += ver3;
+
+            transform.position = startPosition;
+            
         }
         if (ClashBlock != null)
         {
             Destroy();
         }
+        GetEnviropmentBlock();
+
 
     }
     public void Destroy()
@@ -118,16 +160,24 @@ public class AbstractBlock : MonoBehaviour
         block = BlockChange;
     }
 
-
-    //TODO
-    private void CheckBlokBeforeMove()
+    
+    private bool IsThereDirectionalBlock(Vector3 moveDirection)
     {
-        
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.position, out hit, 1))
+        if (isDestroyable == false)
         {
-            return;
+            for (int i = 0; i < 4; i++)
+            {
+
+                if (Vector3.Dot(moveDirection, direction[i]) > 0.9 && environmentBlocks[i])
+                {
+                    transform.position = startPosition;
+                    return true;
+                }
+
+            }
         }
+        return false;
+
     }
 
 }

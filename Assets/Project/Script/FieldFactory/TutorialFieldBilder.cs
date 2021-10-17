@@ -9,7 +9,11 @@ public class TutorialFieldBilder : MonoBehaviour, IFieldBilder
     [SerializeField]
     private BorderBlock borderBlock;
     [SerializeField]
+    private AbstractBlock startedBlock;
+    [SerializeField]
     private List<ItemSO> itemPool;
+
+    private int spawnPointX, spawnPointY;
 
     private Battlefield battlefield;
 
@@ -41,7 +45,7 @@ public class TutorialFieldBilder : MonoBehaviour, IFieldBilder
         {
             for (int j = 0; j < battlefield.line[0].block.Length; j++)
             {
-                
+
                 if (i == 0 || i == battlefield.line.Length - 1 || j == 0 || j == battlefield.line[0].block.Length - 1)
                 {
                     battlefield.line[i].block[j] = borderBlock;
@@ -52,6 +56,8 @@ public class TutorialFieldBilder : MonoBehaviour, IFieldBilder
                 }
             }
         }
+        battlefield.line[3].block[13] = startedBlock;
+        battlefield.line[3].block[12] = startedBlock;
     }
 
     public Battlefield GetField() =>

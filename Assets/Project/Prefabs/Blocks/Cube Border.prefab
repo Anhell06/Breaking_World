@@ -17,6 +17,7 @@ MonoBehaviour:
   isDestroyable: 0
   item: {fileID: 0}
   mover: {fileID: 11400000, guid: 95e9125c4aa3c9f47a948ec8ce946718, type: 2}
+  environmentBlocks: 
 --- !u!1001 &3671877233681388634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28,6 +29,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cube Border
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522389422164821564, guid: e60bca9e7e5407543ad28be2cf363438,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5522389422164821565, guid: e60bca9e7e5407543ad28be2cf363438,
         type: 3}
@@ -82,6 +88,11 @@ PrefabInstance:
     - target: {fileID: 5522389422164821565, guid: e60bca9e7e5407543ad28be2cf363438,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522389422164821567, guid: e60bca9e7e5407543ad28be2cf363438,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:

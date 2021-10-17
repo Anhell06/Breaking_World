@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 //Добавить обязательную проверку на наличии компонента IPlayerMovingSystem
 public class Player : MonoBehaviour
