@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
         if (waitingTime <= 0)
         {
             MovePlayer();
-            
         }
     }
 

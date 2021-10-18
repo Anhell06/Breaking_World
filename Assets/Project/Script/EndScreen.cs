@@ -23,19 +23,20 @@ public class EndScreen : MonoBehaviour
     }
 
 
-    private void StartNextLevel(int levelNumber)
+    public void StartNextLevel(int levelNumber)
     {
-        levelNumber = levelSetting.LevelNumber;
         levelNumber++;
+        levelNumber = levelSetting.LevelNumber;
 
         sceneLoader.LoadLevel(levelNumber);
     }
 
-    private void RestartLevel()
+    public void RestartLevel()
     {
-            
+        Debug.Log("Restart");
+        sceneLoader.LoadLevel(levelSetting.LevelNumber);
     }
-    private void LevelEnded(PlayerStatus playerStatus)
+    public void LevelEnded(PlayerStatus playerStatus)
     {
         if(playerStatus == PlayerStatus.Win || playerStatus == PlayerStatus.Death)
         {
