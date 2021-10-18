@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AbstractBlock : MonoBehaviour
 {
+    private const double OFFSET = 0.5;
     [SerializeField]
     private bool isMovable;
     [SerializeField]
@@ -70,27 +71,31 @@ public class AbstractBlock : MonoBehaviour
             if (IsThereDirectionalBlock(ver3))
                 return;
 
-            
-            if (transform.position.x >= startPosition.x + 0.5)
-            {
-                transform.position = startPosition;
-            }
-            if (transform.position.z >= startPosition.z + 0.5)
-            {
-                transform.position = startPosition;
-            }
-            if (transform.position.x <= startPosition.x - 0.5)
-            {
-                transform.position = startPosition;
-            }
-            if (transform.position.z <= startPosition.z - 0.5)
-            {
-                transform.position = startPosition;
-            }
+            Move();
 
-            transform.position += ver3 ;
+            transform.position += ver3;
         }
 
+    }
+
+    private void Move()
+    {
+        if (transform.position.x >= startPosition.x + OFFSET)
+        {
+            transform.position = startPosition;
+        }
+        if (transform.position.z >= startPosition.z + OFFSET)
+        {
+            transform.position = startPosition;
+        }
+        if (transform.position.x <= startPosition.x - OFFSET)
+        {
+            transform.position = startPosition;
+        }
+        if (transform.position.z <= startPosition.z - OFFSET)
+        {
+            transform.position = startPosition;
+        }
     }
 
     private static Vector3 Vector2ToVector3(Vector2 vector)

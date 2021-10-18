@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
         waitingTime = playerMover.GetWaitingTime;
         Debug.Log("PlayerMove");
     }
-    private void Death()
+    public void Death()
     {
         status = PlayerStatus.Death;
         StatusChanged?.Invoke(status);
