@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 5522389422164821562, guid: e60bca9e7e5407543ad28be2cf363438,
         type: 3}
       propertyPath: m_Name
-      value: Cube Variant
+      value: Cube M
       objectReference: {fileID: 0}
     - target: {fileID: 5522389422164821565, guid: e60bca9e7e5407543ad28be2cf363438,
         type: 3}

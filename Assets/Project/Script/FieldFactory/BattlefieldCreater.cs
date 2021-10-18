@@ -36,7 +36,10 @@ public class BattlefieldCreater : MonoBehaviour
             for (int j = 0; j < battlefield.line[0].block.Length; j++)
             {
                 var block = battlefield.line[i].block[j];
-                Instantiate(block, new Vector3(i, 0, j) + transform.position, Quaternion.identity, transform);
+                if (block)
+                {
+                    Instantiate(block, new Vector3(i, 0, j) + transform.position, Quaternion.identity, transform);
+                }
             }
 
         }
