@@ -18,11 +18,13 @@ public class TimeChanger
         {
             Time.timeScale = 0;
             pause = true;
+            Debug.Log("pause");
         }
         else
         {
             Time.timeScale = 1;
             pause = false;
+            Debug.Log("nepause");
         }
     }
 }
