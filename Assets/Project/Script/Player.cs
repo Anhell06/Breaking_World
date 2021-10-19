@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 
-//ƒобавить об€зательную проверку на наличии компонента IPlayerMovingSystem
 public class Player : MonoBehaviour
 {
     public UnityAction<PlayerStatus> StatusChanged;
@@ -18,7 +16,6 @@ public class Player : MonoBehaviour
     {
         playerMover = GetComponent<IPlayerMovingSystem>();
         waitingTime = playerMover.GetWaitingTime;
-        //установить стартовый статус игрока
     }
 
     private void Update()
@@ -27,73 +24,67 @@ public class Player : MonoBehaviour
         if (waitingTime <= 0)
         {
             MovePlayer();
+            
         }
     }
 
     private void MovePlayer()
     {
-        status = PlayerStatus.Move; //создать метод SetStatus(PlayerStatus status) и вынести в него эту и следующую строку
+        status = PlayerStatus.Move;
         StatusChanged?.Invoke(status);
 
         playerMover.Move();
-        waitingTime = playerMover.GetWaitingTime; //вынести в апдейт под MovePlayer нарушает принцип единой ответственности
+        waitingTime = playerMover.GetWaitingTime;
         Debug.Log("PlayerMove");
     }
     private void Death()
     {
-        status = PlayerStatus.Death; // соответсвуенно оже заменетьс€ на метод SetStatus(PlayerStatus status)
+        status = PlayerStatus.Death;
         StatusChanged?.Invoke(status);
         Debug.Log("Death");
     }
 
     private void TryTakeItem()
     {
-        status = PlayerStatus.Stay; // аналогично
+        status = PlayerStatus.Stay;
         StatusChanged?.Invoke(status);
         Debug.Log("TryTakeItem");
     }
 
     private void LevelEnded()
     {
-        status = PlayerStatus.Win; //тоже
+        status = PlayerStatus.Win;
         StatusChanged?.Invoke(status);
         Debug.Log("LevelEnded");
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        #region Ѕлок        
-        // не исользуй регионы, если хочешь гдето воткнуть регион вынеси это лучше в отдельный метот типа CheckDethBlock()
         var someBlock = other.GetComponent<AbstractBlock>();
 
         if (someBlock != null)
         {
+
             if (someBlock.IsDeathable)
             {
                 Death();
             }
-        }
-        #endregion
 
-        #region  онец уровн€
+            someBlock.GetItem();
+
+            if (someBlock.GetItem() != null)
+            {
+                TryTakeItem();
+            }
+
+        }
+        
         var endLevelTrigger = other.GetComponent<EndLevelTriggerEmpty>();
 
         if (endLevelTrigger != null)
         {
             LevelEnded();
         }
-        #endregion // допиши вынеси в отдельный метот убери регион
-
-        //#region ѕредмет (не дописан)
-        //var tryGetSomeItem = other.TGetComponent<AbstractBlock>();
-
-        //if (tryGetSomeItem != null)
-        //{
-        //    if ()
-             
-        //}
-        //#endregion
-
     }
 
 

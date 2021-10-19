@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPrefsDataSO : ScriptableObject
+[System.Serializable]
+public class PlayerPrefsData 
 {
-    PlayerData playerData = new PlayerData();
+    private PlayerData playerData = new PlayerData();
 
-    const string keyPlayerPref = "key";
+    private const string KEY_PLAYER_PREF = "player data";
 
     private string saveData;
     private string loadData;
 
-    public void AddEndedLevel(List<int[]> massive)
+    public void AddEndedLevel(int levelNumber, int score)
     {
-        playerData.EndedLevelScore = massive;
+        int[] levelAndScore = new int[2] { levelNumber, score };
+        playerData.EndedLevelScore.Add(levelAndScore);
     }
     
     public void AddNewInfinityScore (int point)
@@ -26,15 +28,15 @@ public class PlayerPrefsDataSO : ScriptableObject
         playerData.Name = name;
     }
 
-    public void AddItem(List<int> item)
+    public void AddItem(int item)
     {
-        playerData.ItemList = item;
+        playerData.ItemList.Add(item);
     }
 
     public void Save(PlayerData data)
     {
         saveData = JsonUtility.ToJson(playerData);
-        PlayerPrefs.SetString(saveData, keyPlayerPref);
+        PlayerPrefs.SetString(saveData, KEY_PLAYER_PREF);
     }
     public void Load(PlayerData data)
     {
