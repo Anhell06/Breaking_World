@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoverTestervar2 : MonoBehaviour, IPlayerMovingSystem
+public class PlayerMover : MonoBehaviour, IPlayerMovingSystem
 {
+    private const int OFFCET = 1;
+
     [SerializeField]
     private float speed;
     [SerializeField]
@@ -11,26 +13,31 @@ public class PlayerMoverTestervar2 : MonoBehaviour, IPlayerMovingSystem
 
     private bool isMoving = false;
     private Vector3 currentPosition;
-    private const int Ofset = 1;
+    private float currentTime;
+    private Player player;
 
     public float GetSpeed => speed;
 
     public float GetWaitingTime => waitingTime;
 
-    public void Move()
-    {
-        isMoving = true;
-        Debug.Log("Проверка");
-    }
-
     public void Start()
     {
+        player = GetComponent<Player>();
         currentPosition = transform.position;
+        currentTime = waitingTime;
     }
+
 
     public void Update()
     {
-        if (transform.position.z <= currentPosition.z - Ofset)
+        waitingTime -= Time.deltaTime;
+        if (waitingTime <= 0)
+        {
+            player.MovePlayer();
+            Move();
+        }
+
+        if (transform.position.z <= currentPosition.z - OFFCET)
         {
             isMoving = false;
             currentPosition = transform.position;
@@ -41,4 +48,11 @@ public class PlayerMoverTestervar2 : MonoBehaviour, IPlayerMovingSystem
             transform.position += Time.deltaTime * speed * Vector3.forward;
         }
     }
+    public void Move()
+    {
+        isMoving = true;
+        waitingTime = currentTime;
+        Debug.Log("Move");
+    }
+
 }

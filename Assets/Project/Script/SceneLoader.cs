@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader: MonoBehaviour
+public class SceneLoader : MonoBehaviour
 {
     public void LoadLevel(int levelNumber)
     {
-        SceneManager.LoadScene(levelNumber, LoadSceneMode.Additive);
+        SceneManager.LoadScene(levelNumber, LoadSceneMode.Single);
+    }
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
     }
 }

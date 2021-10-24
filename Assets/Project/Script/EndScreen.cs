@@ -6,14 +6,22 @@ using UnityEngine.UI;
 
 public class EndScreen : MonoBehaviour
 {
-    [SerializeField] private int score;
-    [SerializeField] private GameObject endScreen;
-    [SerializeField] private bool isWin;
-    [SerializeField] private SceneLoader sceneLoader;
-    [SerializeField] private LevelSettingSO levelSetting;
-    [SerializeField] private PlayerPrefsData saveLoadSystem;
-    [SerializeField] private TimeChanger timeChanger = new TimeChanger();
-    [SerializeField] private Player playerStatus;
+    [SerializeField] 
+    private int score;
+    [SerializeField] 
+    private GameObject endScreen;
+    [SerializeField] 
+    private bool isWin;
+    [SerializeField] 
+    private SceneLoader sceneLoader;
+    [SerializeField] 
+    private LevelSettingSO levelSetting;
+    [SerializeField] 
+    private PlayerPrefsData saveLoadSystem;
+    [SerializeField]
+    private TimeChanger timeChanger;
+    [SerializeField] 
+    private Player playerStatus;
     [SerializeField] private GameObject button;
 
 
@@ -23,18 +31,19 @@ public class EndScreen : MonoBehaviour
     }
 
 
-    public void StartNextLevel(int levelNumber)
+    public void StartNextLevel()
     {
-        levelNumber++;
-        levelNumber = levelSetting.LevelNumber;
 
+        var levelNumber = levelSetting.LevelNumber;
+        levelNumber++;
         sceneLoader.LoadLevel(levelNumber);
     }
 
     public void RestartLevel()
     {
         Debug.Log("Restart");
-        sceneLoader.LoadLevel(levelSetting.LevelNumber);
+        sceneLoader.RestartLevel();
+        timeChanger.SetTime(1);
     }
     public void LevelEnded(PlayerStatus playerStatus)
     {

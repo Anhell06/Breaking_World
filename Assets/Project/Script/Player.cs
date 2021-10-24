@@ -8,33 +8,12 @@ public class Player : MonoBehaviour
     public UnityAction<PlayerStatus> StatusChanged;
 
     private List<ItemSO> items;
-    private IPlayerMovingSystem playerMover;
     private PlayerStatus status;
-    private float waitingTime;
 
-    private void Start()
+    public void MovePlayer()
     {
-        playerMover = GetComponent<IPlayerMovingSystem>();
-        waitingTime = playerMover.GetWaitingTime;
-    }
-
-    private void Update()
-    {
-        waitingTime -= Time.deltaTime;
-        if (waitingTime <= 0)
-        {
-            MovePlayer();
-        }
-    }
-
-    private void MovePlayer()
-    {
-        status = PlayerStatus.Move;
+        status = PlayerStatus.Move; 
         StatusChanged?.Invoke(status);
-
-        playerMover.Move();
-        waitingTime = playerMover.GetWaitingTime;
-        Debug.Log("PlayerMove");
     }
     private void Death()
     {

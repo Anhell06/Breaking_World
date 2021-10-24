@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class TimeChanger 
+public class TimeChanger: MonoBehaviour
 {
     private bool pause = false;
 
