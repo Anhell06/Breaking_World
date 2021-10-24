@@ -22,7 +22,13 @@ public class EndScreen : MonoBehaviour
     private TimeChanger timeChanger;
     [SerializeField] 
     private Player playerStatus;
-    [SerializeField] private GameObject button;
+    [SerializeField] 
+    private GameObject button;
+    [SerializeField]
+    private GameObject winScreen;
+    [SerializeField]
+    private GameObject menuScreen;
+
 
 
     private void Start()
@@ -54,7 +60,9 @@ public class EndScreen : MonoBehaviour
 
             if(playerStatus == PlayerStatus.Win)
             {
-                button.SetActive(true);
+                menuScreen.SetActive(false);
+                endScreen.SetActive(false);
+                winScreen.SetActive(true);
             }
         }
     }
