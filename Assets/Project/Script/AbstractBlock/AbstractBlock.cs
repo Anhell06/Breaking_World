@@ -66,14 +66,15 @@ public class AbstractBlock : MonoBehaviour
     {
         if (isMovable)
         {
-            Vector3 ver3 = Vector2ToVector3(vector);
+            Vector3 napravDvigenia = Vector2ToVector3(vector);
 
-            if (IsThereDirectionalBlock(ver3))
-                return;
+            if (IsThereDirectionalBlock(napravDvigenia))
+
+            return;
 
             Move();
 
-            transform.position += ver3;
+            transform.position += napravDvigenia;
         }
 
     }
@@ -112,10 +113,11 @@ public class AbstractBlock : MonoBehaviour
     {
         if (isMovable)
         {
-            Vector3 ver3 = Vector2ToVector3(vector);
+            Vector3 napravDvigenia = Vector2ToVector3(vector);
 
-            if (IsThereDirectionalBlock(ver3) == false)
-                startPosition += ver3;
+            if (IsThereDirectionalBlock(napravDvigenia) == false)
+
+            startPosition += napravDvigenia;
 
             transform.position = startPosition;
             
