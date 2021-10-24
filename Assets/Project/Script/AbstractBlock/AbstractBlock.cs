@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class AbstractBlock : MonoBehaviour
 {
-    private const double OFFSET = 0.5;
+    private const double OFFSET = 0.5; 
+
     [SerializeField]
     private bool isMovable;
     [SerializeField]
@@ -16,11 +17,11 @@ public class AbstractBlock : MonoBehaviour
     private ItemSO item;
     [SerializeField]
     private MoveFieldChanelSO mover;
-    private Vector3 startPosition;
-    private AbstractBlock ClashBlock;
-    
     [SerializeField]
     private bool[] environmentBlocks;
+    
+    private AbstractBlock ClashBlock;
+    private Vector3 startPosition;
     private Vector3[] direction;
 
     public bool IsDeathable { get => isDeathable; }
@@ -66,15 +67,15 @@ public class AbstractBlock : MonoBehaviour
     {
         if (isMovable)
         {
-            Vector3 napravDvigenia = Vector2ToVector3(vector);
+            Vector3 moveDirection = Vector2ToVector3(vector);
 
-            if (IsThereDirectionalBlock(napravDvigenia))
+            if (IsThereDirectionalBlock(moveDirection))
 
             return;
 
             Move();
 
-            transform.position += napravDvigenia;
+            transform.position += moveDirection;
         }
 
     }
@@ -113,11 +114,11 @@ public class AbstractBlock : MonoBehaviour
     {
         if (isMovable)
         {
-            Vector3 napravDvigenia = Vector2ToVector3(vector);
+            Vector3 moveDirection = Vector2ToVector3(vector);
 
-            if (IsThereDirectionalBlock(napravDvigenia) == false)
+            if (IsThereDirectionalBlock(moveDirection) == false)
 
-            startPosition += napravDvigenia;
+            startPosition += moveDirection;
 
             transform.position = startPosition;
             

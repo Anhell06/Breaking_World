@@ -7,25 +7,34 @@ public class BlockChecker : MonoBehaviour
     private RaycastHit hit;
     private Player player;
 
-    void CheckemptyBlock()
+    public void OnTriggerExit(Collider other)
     {
-        //сам луч, начинается от позиции этого объекта и направлен в сторону цели
-        Ray ray = new Ray(transform.position + Vector3.forward / 2, Vector3.down);
-        //пускаем луч
-        Physics.Raycast(ray, out hit);
+        CheckEmptyBlock();
+    }
+    void CheckEmptyBlock()
+    { RaycastHit[] hits;
+        
+        Vector3 startRayPosition = new Vector3();
+        startRayPosition = transform.position - Vector3.forward/2 + Vector3.up;
 
-        //если луч с чем-то пересёкся, то..
-        if (hit.transform.GetComponent<AbstractBlock>() == true)
+        Ray ray = new Ray(startRayPosition, Vector3.down*3);
+      
+        hits = Physics.RaycastAll(ray);
+        
+        Debug.DrawRay(startRayPosition, Vector3.down*3, Color.blue,2f);
+
+        foreach (var hit in hits)
         {
+            Debug.Log(hit.transform.name);
         }
-        else
+
+        if (hits.Length == 0)
         {
             player.Death();
         }
-
     }
     public void Start()
     {
-        gameObject.GetComponent<Player>();
+        player = gameObject.GetComponent<Player>();
     }
 }
