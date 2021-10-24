@@ -56,8 +56,8 @@ public class TutorialFieldBilder : MonoBehaviour, IFieldBilder
                 }
             }
         }
-        battlefield.line[3].block[13] = startedBlock;
-        battlefield.line[3].block[12] = startedBlock;
+        battlefield.line[3].block[battlefield.line[0].block.Length - 1] = startedBlock;
+        battlefield.line[3].block[battlefield.line[0].block.Length - 2] = startedBlock;
     }
 
     public Battlefield GetField() =>

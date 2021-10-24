@@ -12,6 +12,8 @@ public class BattlefieldCreater : MonoBehaviour
     private int fieldWidth;
     [SerializeField]
     private int fieldHeight;
+    [SerializeField]
+    private int StartPositin;
 
     private int difficulty;
 
@@ -19,6 +21,8 @@ public class BattlefieldCreater : MonoBehaviour
     {
         fieldBilder = GetComponent<IFieldBilder>();
         CreateField();
+        //CreateStartPozition();
+        //CreateStartPozition();
     }
 
     private void CreateField()
