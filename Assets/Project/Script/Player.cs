@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
         status = PlayerStatus.Move; 
         StatusChanged?.Invoke(status);
     }
-    private void Death()
+    public void Death()
     {
         status = PlayerStatus.Death;
         StatusChanged?.Invoke(status);
