@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class AbstractBlock : MonoBehaviour
 {
-    //Разкидать все переменные по местам, сначала публичные, потом сериалайз приватные, потом приватные, потом свойства
+    private const double OFFSET = 0.5; 
+
     [SerializeField]
     private bool isMovable;
     [SerializeField]
@@ -16,15 +17,21 @@ public class AbstractBlock : MonoBehaviour
     private ItemSO item;
     [SerializeField]
     private MoveFieldChanelSO mover;
-    private Vector3 startPosition;
-    private AbstractBlock ClashBlock;
-    
     [SerializeField]
     private bool[] environmentBlocks;
+    
+    private AbstractBlock ClashBlock;
+    private Vector3 startPosition;
     private Vector3[] direction;
 
     public bool IsDeathable { get => isDeathable; }
-    
+
+    private void Update()
+    {
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.red);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left), Color.green);
+    }
+
 
     private void Start()
     {
@@ -60,52 +67,58 @@ public class AbstractBlock : MonoBehaviour
     {
         if (isMovable)
         {
-            Vector3 ver3 = Vector2ToVector3(vector); //ver3 переименовать в нормальное название (через ф2 удобнее)
+            Vector3 moveDirection = Vector2ToVector3(vector);
 
-            if (IsThereDirectionalBlock(ver3))
-                return;
+            if (IsThereDirectionalBlock(moveDirection))
 
-            
-            if (transform.position.x >= startPosition.x + 0.5)
-            {
-                transform.position = startPosition;
-            }
-            if (transform.position.z >= startPosition.z + 0.5)
-            {
-                transform.position = startPosition;
-            }
-            if (transform.position.x <= startPosition.x - 0.5)
-            {
-                transform.position = startPosition;
-            }
-            if (transform.position.z <= startPosition.z - 0.5)
-            {
-                transform.position = startPosition;
-            }
+            return;
 
-            transform.position += ver3 ;
+            Move();
+
+            transform.position += moveDirection;
         }
 
     }
 
-    private static Vector3 Vector2ToVector3(Vector2 vector) //Убрать в самый низ так как являеться служебным методом
+    private void Move()
+    {
+        if (transform.position.x >= startPosition.x + OFFSET)
+        {
+            transform.position = startPosition;
+        }
+        if (transform.position.z >= startPosition.z + OFFSET)
+        {
+            transform.position = startPosition;
+        }
+        if (transform.position.x <= startPosition.x - OFFSET)
+        {
+            transform.position = startPosition;
+        }
+        if (transform.position.z <= startPosition.z - OFFSET)
+        {
+            transform.position = startPosition;
+        }
+    }
+
+    private static Vector3 Vector2ToVector3(Vector2 vector)
     {
         return new Vector3(vector.x, 0, vector.y);
     }
 
-    private void OnDestroy() //Убрать в самый низ так как являеться служебным методом
+    private void OnDestroy()
     {
         mover.TouchForMoveFildeUpdate -= StartTouch;
         mover.TouchBeEnded -= EndMove;
     }
-    private void EndMove(Vector2 vector) //отформотировать пробелы между методами по классу
+    private void EndMove(Vector2 vector)
     {
         if (isMovable)
         {
-            Vector3 ver3 = Vector2ToVector3(vector); //ver3 переименовать в нормальное название (через ф2 чтобы не сломать ничего)
+            Vector3 moveDirection = Vector2ToVector3(vector);
 
-            if (IsThereDirectionalBlock(ver3) == false)
-                startPosition += ver3;
+            if (IsThereDirectionalBlock(moveDirection) == false)
+
+            startPosition += moveDirection;
 
             transform.position = startPosition;
             
@@ -114,7 +127,6 @@ public class AbstractBlock : MonoBehaviour
         {
             Destroy();
         }
-
         GetEnviropmentBlock();
 
 
@@ -128,28 +140,29 @@ public class AbstractBlock : MonoBehaviour
     }
     public ItemSO GetItem()
     {
-        if (item == null || item.isUsable == false)
+        if (item == null)
         {
             return null;
         }
-        else
+        if (item.isUsable)
         {
             return item;
         }
+        return null;
     }
 
-    public void OnTriggerEnter(Collider other) //Убрать в самый низ так как являеться служебным методом
+    public void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<AbstractBlock>())
         {
             ClashBlock = other.GetComponent<AbstractBlock>();
         }
     }
-    public void OnTriggerExit(Collider other) //Убрать в самый низ так как являеться служебным методом
+    public void OnTriggerExit(Collider other)
     {
         ClashBlock = null;
     }
-    public void ChangeTypeThisBlock(AbstractBlock BlockChange) 
+    public void ChangeTypeThisBlock(AbstractBlock BlockChange)
     {
         var block = gameObject.AddComponent<AbstractBlock>();
         block = BlockChange;
