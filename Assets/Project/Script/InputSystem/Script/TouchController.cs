@@ -89,7 +89,6 @@ public class TouchController : MonoBehaviour
     {
         lastDirection = vector;
         moveMessageChanel.UpdateMovingMessage(vector);
-        //Debug.Log(name + " " + vector);
     }
 }
 

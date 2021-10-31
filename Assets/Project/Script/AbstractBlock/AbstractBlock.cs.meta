@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:Assets/Project/Script/Player.cs.meta
+guid: 29b84a04db6a09c498d24620a74e118f
+=======
+<<<<<<< HEAD:Assets/Project/Script/FieldFactory/Battlefield.cs.meta
+guid: a60cbe993c59ef94da8ded92627a767d
+>>>>>>> remotes/origin/lesnik56
+=======
+guid: d88ef61ce50270646bff230e536318f9
+>>>>>>> remotes/origin/lesnik56:Assets/Project/Script/AbstractBlock/AbstractBlock.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
