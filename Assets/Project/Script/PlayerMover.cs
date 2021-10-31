@@ -55,4 +55,11 @@ public class PlayerMover : MonoBehaviour, IPlayerMovingSystem
         Debug.Log("Move");
     }
 
+    public void SetWaitingTime(float newWaitingTime)
+    {
+        if (newWaitingTime > 0 || newWaitingTime < waitingTime)
+        {
+            waitingTime = newWaitingTime;
+        }
+    }
 }

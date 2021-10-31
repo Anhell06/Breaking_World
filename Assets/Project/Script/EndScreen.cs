@@ -6,34 +6,37 @@ using UnityEngine.UI;
 
 public class EndScreen : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     private int score;
-    [SerializeField] 
+    [SerializeField]
     private GameObject endScreen;
-    [SerializeField] 
+    [SerializeField]
     private bool isWin;
-    [SerializeField] 
+    [SerializeField]
     private SceneLoader sceneLoader;
-    [SerializeField] 
+    [SerializeField]
     private LevelSettingSO levelSetting;
-    [SerializeField] 
+    [SerializeField]
     private PlayerPrefsData saveLoadSystem;
     [SerializeField]
     private TimeChanger timeChanger;
-    [SerializeField] 
+    [SerializeField]
     private Player playerStatus;
-    [SerializeField] 
+    [SerializeField]
     private GameObject button;
     [SerializeField]
     private GameObject winScreen;
     [SerializeField]
     private GameObject menuScreen;
+    [SerializeField]
+    private GameObject continueButton;
 
 
 
     private void Start()
     {
         playerStatus.StatusChanged += LevelEnded;
+        playerStatus.StatusChanged += PlayerDeath;
     }
 
 
@@ -53,18 +56,33 @@ public class EndScreen : MonoBehaviour
     }
     public void LevelEnded(PlayerStatus playerStatus)
     {
-        if(playerStatus == PlayerStatus.Win || playerStatus == PlayerStatus.Death)
+        if (playerStatus == PlayerStatus.Win)
         {
             endScreen.SetActive(true);
-            timeChanger.Pause(); 
-
-            if(playerStatus == PlayerStatus.Win)
-            {
-                menuScreen.SetActive(false);
-                endScreen.SetActive(false);
-                winScreen.SetActive(true);
-            }
+            timeChanger.Pause();
+            menuScreen.SetActive(false);
+            endScreen.SetActive(false);
+            winScreen.SetActive(true);
         }
+    }
+
+    private void PlayerDeath(PlayerStatus playerStatus)
+    {
+        if (playerStatus == PlayerStatus.Death)
+        {
+            endScreen.SetActive(true);
+            timeChanger.Pause();
+            continueButton.SetActive(false);
+            menuScreen.SetActive(false);
+            winScreen.SetActive(false);
+        }
+
+    }
+
+    private void OnDestroy()
+    {
+        playerStatus.StatusChanged -= LevelEnded;
+        playerStatus.StatusChanged -= PlayerDeath;
     }
 
 
